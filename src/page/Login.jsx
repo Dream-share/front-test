@@ -4,6 +4,7 @@ import React from 'react';
 import KakaoLoginImage from 'static/img/kakao_login_medium_narrow.png';
 
 const Login = () => {
+
   return (
     <div>
       {' '}

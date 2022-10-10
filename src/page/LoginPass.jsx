@@ -12,11 +12,12 @@ const Login = () => {
   const handleLogin = async () => {
     if (code) {
       const result = await kakaoAPI.login({ code });
-
-      if (result?.id) {
-        navigate('/');
+      console.log(result)
+      if (result.success) {
+        const jwt = result?.data?.jwt;
+        navigate('/home/' + jwt);
       } else {
-        alert('로그인 실패');
+        alert('로그인 실패', result);
         navigate('/login');
       }
     } else {

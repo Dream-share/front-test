@@ -9,6 +9,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/home/:token" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/loginpass" element={<LoginPass />} />
       </Routes>

@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080';
+const API_URL = 'http://3.39.11.200:8080';
 
 async function login({ code }) {
   const options = {
     method: 'GET',
-    url: API_URL + `/login-api`,
-
+    url: API_URL + `/api/v0/member/login-kakao`,
     params: {
       code,
     },
@@ -19,14 +18,13 @@ async function login({ code }) {
   }
 }
 
-// NOTE : POST 방식 예시
-async function postWay({ code, token }) {
+async function setMyName({ token, name }) {
   const options = {
-    method: 'POST',
-    url: API_URL + '/test/post',
+    method: 'PATCH',
+    url: API_URL + '/api/v0/member/me/name',
 
     data: {
-      code,
+      name,
     },
     headers: {
       Authorization: token,
@@ -41,6 +39,24 @@ async function postWay({ code, token }) {
   }
 }
 
-const kakaoAPI = { login, postWay };
+async function getMyInfo({ token }) {
+  const options = {
+    method: 'GET',
+    url: API_URL + `/api/v0/member/me`,
+
+    headers: {
+      Authorization: token,
+    },
+  };
+
+  try {
+    const response = await axios(options);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+}
+
+const kakaoAPI = { login, setMyName, getMyInfo };
 
 export default kakaoAPI;
